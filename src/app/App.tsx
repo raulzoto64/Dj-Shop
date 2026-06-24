@@ -186,7 +186,9 @@ function HomePage({ productos, loading, navTo, setSearchQuery, setFilterCategory
     console.log("🔎 Productos totales:", productos.length);
     console.log("⭐ Productos con etiqueta 'premium':", premium.length, premium.map(p => p.nombre));
     console.log("🔥 Productos destacados (popular/premium):", pop.length, pop.map(p => p.nombre));
-    return pop.length > 0 ? pop.slice(0, 8) : productos.slice(0, 8);
+    const resultado = pop.length > 0 ? pop.slice(0, 8) : productos.slice(0, 8);
+    console.log("📋 Resultado destacados a renderizar:", resultado.length, resultado.map(p => p.nombre));
+    return resultado;
   }, [productos]);
   if (loading) return <LoadingSkeleton />;
   return (
@@ -245,6 +247,47 @@ function HomePage({ productos, loading, navTo, setSearchQuery, setFilterCategory
               </Grid>
             ))}
           </Grid>
+        </Container>
+      </Box>
+
+      {/* Footer */}
+      <Box sx={{ background: "#0a120a", py: 6, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
+                <Spa sx={{ color: "#8b6914" }} />
+                <Typography variant="h6" sx={{ fontFamily: "Montserrat", fontWeight: 800 }}>BotanikaPE</Typography>
+              </Box>
+              <Typography variant="body2" sx={{ color: "#a0a0a0", lineHeight: 1.8 }}>
+                Marketplace de productos botánicos naturales seleccionados de la Amazonía y los Andes del Perú.
+              </Typography>
+            </Grid>
+            <Grid size={{ xs: 6, md: 2 }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 2, color: "#8b6914" }}>Categorías</Typography>
+                <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Hierbas</Typography>
+                <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Hongos</Typography>
+                <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Extractos</Typography>
+                <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Esencias</Typography>
+                <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Polvos</Typography>
+            </Grid>
+            <Grid size={{ xs: 6, md: 2 }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 2, color: "#8b6914" }}>Legal</Typography>
+                <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Términos y condiciones</Typography>
+                <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Política de privacidad</Typography>
+                <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Envíos y devoluciones</Typography>
+            </Grid>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 2, color: "#8b6914" }}>Contacto</Typography>
+              <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>WhatsApp: +51 999 888 777</Typography>
+              <Typography variant="body2" sx={{ color: "#a0a0a0", mb: 0.5 }}>Email: hola@botanikape.com</Typography>
+              <Typography variant="body2" sx={{ color: "#a0a0a0" }}>Lima, Perú</Typography>
+            </Grid>
+          </Grid>
+          <Divider sx={{ my: 4 }} />
+          <Typography variant="caption" sx={{ color: "#606060", textAlign: "center", display: "block" }}>
+            © 2025 BotanikaPE — Proyecto de demostración. Los pagos son simulados.
+          </Typography>
         </Container>
       </Box>
     </Box>
