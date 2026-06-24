@@ -182,6 +182,10 @@ function HomePage({ productos, loading, navTo, setSearchQuery, setFilterCategory
   const [localSearch, setLocalSearch] = useState("");
   const destacados = useMemo(() => {
     const pop = productos.filter(p => p.etiquetas.includes("popular") || p.etiquetas.includes("premium"));
+    const premium = productos.filter(p => p.etiquetas.includes("premium"));
+    console.log("🔎 Productos totales:", productos.length);
+    console.log("⭐ Productos con etiqueta 'premium':", premium.length, premium.map(p => p.nombre));
+    console.log("🔥 Productos destacados (popular/premium):", pop.length, pop.map(p => p.nombre));
     return pop.length > 0 ? pop.slice(0, 8) : productos.slice(0, 8);
   }, [productos]);
   if (loading) return <LoadingSkeleton />;
