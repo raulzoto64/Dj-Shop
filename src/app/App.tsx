@@ -380,8 +380,7 @@ export default function App() {
         const { data, error } = await supabase.from("productos").select("*").order("id");
         if (error) throw error;
         if (data) setProductos(data.map((r: Record<string, unknown>) => mapearProducto(r)));
-      } catch (err) {
-        console.error("Error al cargar productos:", err);
+      } catch {
         setSnackbar({ open: true, msg: "Error al cargar productos", severity: "error" });
       } finally {
         setLoading(false);
