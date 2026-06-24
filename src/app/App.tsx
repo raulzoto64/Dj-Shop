@@ -180,7 +180,10 @@ interface HomePageProps {
 
 function HomePage({ productos, loading, navTo, setSearchQuery, setFilterCategory, setSelectedProduct, addToCart }: HomePageProps) {
   const [localSearch, setLocalSearch] = useState("");
-  const destacados = useMemo(() => productos.filter(p => p.etiquetas.includes("popular") || p.etiquetas.includes("premium")).slice(0, 8), [productos]);
+  const destacados = useMemo(() => {
+    const pop = productos.filter(p => p.etiquetas.includes("popular") || p.etiquetas.includes("premium"));
+    return pop.length > 0 ? pop.slice(0, 8) : productos.slice(0, 8);
+  }, [productos]);
   if (loading) return <LoadingSkeleton />;
   return (
     <Box>
