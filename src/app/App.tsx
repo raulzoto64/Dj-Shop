@@ -194,8 +194,8 @@ function HomePage({ productos, loading, navTo, setSearchQuery, setFilterCategory
   return (
     <Box>
       <Box sx={{ minHeight: "90vh", display: "flex", alignItems: "center", background: "linear-gradient(135deg, #0f1a0f 0%, #1b3a1b 40%, #1a1228 100%)", position: "relative", overflow: "hidden" }}>
-        <Box sx={{ position: "absolute", inset: 0, opacity: 0.15, backgroundImage: "url(https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?w=1400&fit=crop)", backgroundSize: "cover", backgroundPosition: "center" }} />
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+      <Box sx={{ position: "absolute", inset: 0, opacity: 0.15, backgroundImage: "url(https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?w=1400&fit=crop)", backgroundSize: "cover", backgroundPosition: "center" }} />
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, pb: 4 }}>
           <Grid container spacing={4} alignItems="center">
             <Grid size={{ xs: 12, md: 7 }}>
               <Typography variant="h1" sx={{ fontSize: { xs: "2.5rem", md: "4rem" }, fontWeight: 800, lineHeight: 1.1, mb: 2, color: "#e8e8e8" }}>
@@ -212,6 +212,22 @@ function HomePage({ productos, loading, navTo, setSearchQuery, setFilterCategory
                 InputProps={{ startAdornment: <InputAdornment position="start"><Search sx={{ color: "#8b6914" }} /></InputAdornment>,
                   endAdornment: localSearch && <InputAdornment position="end"><Button size="small" variant="contained" onClick={() => { setSearchQuery(localSearch); navTo("catalogo"); }}>Buscar</Button></InputAdornment> }}
                 sx={{ maxWidth: 520 }} />
+            </Grid>
+            <Grid size={{ xs: 12, md: 5 }}>
+              <Box sx={{ position: "relative", background: "rgba(0,0,0,0.3)", borderRadius: 3, p: 2, border: "1px solid rgba(255,255,255,0.1)" }}>
+                <Typography variant="subtitle2" sx={{ color: "#8b6914", fontWeight: 700, mb: 2 }}>⭐ PRODUCTOS DESTACADOS</Typography>
+                <Box sx={{ display: "flex", gap: 2, overflowX: "auto", pb: 1, "&::-webkit-scrollbar": { height: 6 } }}>
+                  {destacados.slice(0, 4).map(p => (
+                    <Box key={p.id} sx={{ minWidth: 140, cursor: "pointer" }} onClick={() => { setSelectedProduct(p); navTo("producto"); }}>
+                      <Box sx={{ borderRadius: 2, overflow: "hidden", mb: 1, border: "1px solid rgba(255,255,255,0.1)" }}>
+                        <img src={p.imagen} alt={p.nombre} style={{ width: "100%", height: 100, objectFit: "cover" }} />
+                      </Box>
+                      <Typography variant="caption" sx={{ color: "#e8e8e8", fontWeight: 600, display: "block", mb: 0.5, fontSize: "0.75rem" }}>{p.nombre}</Typography>
+                      <Typography variant="caption" sx={{ color: "#8b6914", fontWeight: 700, fontFamily: "Roboto Mono" }}>S/ {p.precio.toFixed(2)}</Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
             </Grid>
           </Grid>
         </Container>
